@@ -14,7 +14,13 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  fail "Unimplemented"
+  pos_e1 = page.body.index(e1)
+  pos_e2 = page.body.index(e2)
+  if (pos_e1.nil? || pos_e2.nil?)
+  	fail "Title does not exist"
+  elsif (pos_e1.should_not >pos_e2)
+  	fail "Out of Order"
+  end
 end
 
 # Make it easier to express checking or unchecking several boxes at once
